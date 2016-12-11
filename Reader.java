@@ -17,7 +17,7 @@ public class Reader implements ISubscriber, Runnable {
 
     @Override
     public void inform(News news) {
-        System.out.println("News title: " + news.title + " news domain: " + news.domain);
+        System.out.println("Reader " + "News title: " + news.title + " news domain: " + news.domain);
     }
 
     @Override
@@ -29,9 +29,18 @@ public class Reader implements ISubscriber, Runnable {
         this.filter = filter;
     }
 
+    public void subscribeWrapper() {
+        subscribe(filter);
+    }
 
     @Override
     public void run() {
-        subscribe(filter);
+        //subscribe(filter);
+        try {
+            Thread.sleep(1500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        unsubscribe(filter);
     }
 }

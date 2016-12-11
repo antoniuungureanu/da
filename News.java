@@ -28,7 +28,7 @@ public class News {
         this.lastChange = lastChange;
     }
 
-    public void read() {
+    public synchronized void read() {
         readCount++;
     }
 

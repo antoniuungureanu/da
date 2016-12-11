@@ -33,7 +33,7 @@ public class Editor implements IPublisher, ISubscriber, Runnable {
 
     @Override
     public void inform(News news) {
-        System.out.println("news title: " + news.title + " Count no: " + news.readCount);
+        System.out.println("Editor " + "news title: " + news.title + " Count no: " + news.readCount);
     }
 
     @Override
@@ -49,9 +49,18 @@ public class Editor implements IPublisher, ISubscriber, Runnable {
         this.news = news;
     }
 
+    public void subscribeWrapper() {
+        subscribe(filter);
+    }
+
     @Override
     public void run() {
-        subscribe(filter);
+        //subscribe(filter);
         publish(news);
+        try {
+            Thread.sleep(1500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }
